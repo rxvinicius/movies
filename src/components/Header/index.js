@@ -1,5 +1,5 @@
 import { Container, MenuButton, Title } from './styles'
-import { Feather } from '@expo/vector-icons'
+import Feather from '@expo/vector-icons/Feather'
 import COLORS from '../../styles/colors'
 import { useNavigation } from '@react-navigation/native'
 

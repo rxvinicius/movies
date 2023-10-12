@@ -1,6 +1,6 @@
-import { ScrollView, View } from 'react-native'
+import { ScrollView } from 'react-native'
 import Header from '../../components/Header'
-import { Feather } from '@expo/vector-icons'
+import Feather from '@expo/vector-icons/Feather'
 import {
   Container,
   SearchContainer,
@@ -19,10 +19,6 @@ export default function Home() {
 
   }
 
-  const renderItemList = ({ item }) => {
-
-  }
-
   return (
     <Container>
       <Header title='React Prime' />
@@ -37,7 +33,7 @@ export default function Home() {
         </SearchButton>
       </SearchContainer>
 
-      <View>
+      <ScrollView showsVerticalScrollIndicator={false}>
         <Title>Trending</Title>
         <BannerButton activeOpacity={0.8} onPress={handleSelectBanner}>
           <Banner
@@ -48,10 +44,27 @@ export default function Home() {
 
         <SliderMovie
           horizontal={true}
+          showsHorizontalScrollIndicator={false}
           data={[1, 2, 3, 4]}
           renderItem={({ item }) => <SliderItem />}
         />
-      </View>
+
+        <Title>Popular</Title>
+        <SliderMovie
+          horizontal={true}
+          showsHorizontalScrollIndicator={false}
+          data={[1, 2, 3, 4]}
+          renderItem={({ item }) => <SliderItem />}
+        />
+
+        <Title>Top rated</Title>
+        <SliderMovie
+          horizontal={true}
+          showsHorizontalScrollIndicator={false}
+          data={[1, 2, 3, 4]}
+          renderItem={({ item }) => <SliderItem />}
+        />
+      </ScrollView>
     </Container>
   )
 }

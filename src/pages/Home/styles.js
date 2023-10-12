@@ -36,17 +36,14 @@ export const SearchButton = styled.TouchableOpacity`
 `
 
 export const Title = styled.Text`
-  padding-top: 20px;
-  padding-bottom: 8px;
+  padding: 10px 14px 8px 14px;
   font-size: 24px;
   font-weight: bold;
   color: ${COLORS.WHITE};
-  padding-right: 14px;
-  padding-left: 14px;
 `
 
 export const BannerButton = styled.TouchableOpacity`
-
+  padding-bottom: 12px;
 `
 
 export const Banner = styled.Image`
@@ -56,6 +53,6 @@ export const Banner = styled.Image`
 `
 
 export const SliderMovie = styled.FlatList`
-  height: 250px;
+  height: 230px;
   padding: 0 14px;
 `
