@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import { ScrollView } from 'react-native'
 import Header from '../../components/Header'
 import Feather from '@expo/vector-icons/Feather'
@@ -13,11 +14,34 @@ import {
 } from './styles'
 import COLORS from '../../styles/colors'
 import SliderItem from '../../components/SliderItem'
+import MoviesService from '../../services/MoviesService'
+import { URL_MOVIES_DB } from '../../shared/constants'
 
 export default function Home() {
-  const handleSelectBanner = () => {
+  const [nowMovies, setNowMovies] = useState([]);
+  const [popularMovies, setPopularMovies] = useState([]);
+  const [topMovies, setTopMovies] = useState([]);
+  const moviesService = new MoviesService();
 
+  const handleSelectBanner = () => {
+    
   }
+
+  useEffect(() => {
+    let isActive = true
+
+    async function getMovies() {
+      const [nowData, popularData, topRatedData] = await Promise.all([
+        moviesService.getMovie(URL_MOVIES_DB.now_movies),
+        moviesService.getMovie(URL_MOVIES_DB.popular),
+        moviesService.getMovie(URL_MOVIES_DB.top_rated),
+      ]);
+      setNowMovies(nowData.data.results);
+      setPopularMovies(popularData.data.results);
+      setTopMovies(topRatedData.data.results);
+    }
+    getMovies();
+  }, [])
 
   return (
     <Container>
