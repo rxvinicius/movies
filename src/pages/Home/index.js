@@ -16,6 +16,7 @@ import COLORS from '../../styles/colors'
 import SliderItem from '../../components/SliderItem'
 import MoviesService from '../../services/MoviesService'
 import { URL_MOVIES_DB } from '../../shared/constants'
+import { arraySize } from '../../utils'
 
 export default function Home() {
   const [nowMovies, setNowMovies] = useState([]);
@@ -36,9 +37,9 @@ export default function Home() {
         moviesService.getMovie(URL_MOVIES_DB.popular),
         moviesService.getMovie(URL_MOVIES_DB.top_rated),
       ]);
-      setNowMovies(nowData.data.results);
-      setPopularMovies(popularData.data.results);
-      setTopMovies(topRatedData.data.results);
+      setNowMovies(arraySize(10, nowData.data.results));
+      setPopularMovies(arraySize(5, popularData.data.results));
+      setTopMovies(arraySize(5, topRatedData.data.results));
     }
     getMovies();
   }, [])
@@ -69,24 +70,24 @@ export default function Home() {
         <SliderMovie
           horizontal={true}
           showsHorizontalScrollIndicator={false}
-          data={[1, 2, 3, 4]}
-          renderItem={({ item }) => <SliderItem />}
+          data={nowMovies}
+          renderItem={({ item }) => <SliderItem data={item} />}
         />
 
         <Title>Popular</Title>
         <SliderMovie
           horizontal={true}
           showsHorizontalScrollIndicator={false}
-          data={[1, 2, 3, 4]}
-          renderItem={({ item }) => <SliderItem />}
+          data={popularMovies}
+          renderItem={({ item }) => <SliderItem data={item} />}
         />
 
         <Title>Top rated</Title>
         <SliderMovie
           horizontal={true}
           showsHorizontalScrollIndicator={false}
-          data={[1, 2, 3, 4]}
-          renderItem={({ item }) => <SliderItem />}
+          data={topMovies}
+          renderItem={({ item }) => <SliderItem data={item} />}
         />
       </ScrollView>
     </Container>
