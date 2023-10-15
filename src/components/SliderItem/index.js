@@ -8,18 +8,22 @@ import {
 import COLORS from '../../styles/colors'
 import Ionicons from '@expo/vector-icons/Ionicons'
 
-export default function SliderItem() {
+export default function SliderItem(params) {
+  const { data } = params;
+  const { original_title, poster_path, vote_average } = data;
+  const imageURL = 'https://image.tmdb.org/t/p/original';
+
   return (
     <Container activeOpacity={0.7}>
       <BannerItem
-        source={{ uri: 'https://images.unsplash.com/photo-1618336753974-aae8e04506aa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80' }}
+        source={{ uri: `${imageURL}/${poster_path}` }}
       />
 
-      <Title numberOfLines={1}>Star Wars</Title>
+      <Title numberOfLines={1}>{original_title }</Title>
       <RateContainer>
         <Ionicons name='md-star' size={12} color={COLORS.YELLOW} />
-        <Rate>9/10</Rate>
+        <Rate>{vote_average}/10</Rate>
       </RateContainer>
     </Container>
-  )
+  );
 }

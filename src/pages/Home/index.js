@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import { ScrollView } from 'react-native'
 import Header from '../../components/Header'
 import Feather from '@expo/vector-icons/Feather'
@@ -13,11 +14,35 @@ import {
 } from './styles'
 import COLORS from '../../styles/colors'
 import SliderItem from '../../components/SliderItem'
+import MoviesService from '../../services/MoviesService'
+import { URL_MOVIES_DB } from '../../shared/constants'
+import { arraySize } from '../../utils'
 
 export default function Home() {
-  const handleSelectBanner = () => {
+  const [nowMovies, setNowMovies] = useState([]);
+  const [popularMovies, setPopularMovies] = useState([]);
+  const [topMovies, setTopMovies] = useState([]);
+  const moviesService = new MoviesService();
 
+  const handleSelectBanner = () => {
+    
   }
+
+  useEffect(() => {
+    let isActive = true
+
+    async function getMovies() {
+      const [nowData, popularData, topRatedData] = await Promise.all([
+        moviesService.getMovie(URL_MOVIES_DB.now_movies),
+        moviesService.getMovie(URL_MOVIES_DB.popular),
+        moviesService.getMovie(URL_MOVIES_DB.top_rated),
+      ]);
+      setNowMovies(arraySize(10, nowData.data.results));
+      setPopularMovies(arraySize(5, popularData.data.results));
+      setTopMovies(arraySize(5, topRatedData.data.results));
+    }
+    getMovies();
+  }, [])
 
   return (
     <Container>
@@ -45,24 +70,24 @@ export default function Home() {
         <SliderMovie
           horizontal={true}
           showsHorizontalScrollIndicator={false}
-          data={[1, 2, 3, 4]}
-          renderItem={({ item }) => <SliderItem />}
+          data={nowMovies}
+          renderItem={({ item }) => <SliderItem data={item} />}
         />
 
         <Title>Popular</Title>
         <SliderMovie
           horizontal={true}
           showsHorizontalScrollIndicator={false}
-          data={[1, 2, 3, 4]}
-          renderItem={({ item }) => <SliderItem />}
+          data={popularMovies}
+          renderItem={({ item }) => <SliderItem data={item} />}
         />
 
         <Title>Top rated</Title>
         <SliderMovie
           horizontal={true}
           showsHorizontalScrollIndicator={false}
-          data={[1, 2, 3, 4]}
-          renderItem={({ item }) => <SliderItem />}
+          data={topMovies}
+          renderItem={({ item }) => <SliderItem data={item} />}
         />
       </ScrollView>
     </Container>
