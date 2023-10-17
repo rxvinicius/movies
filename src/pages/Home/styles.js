@@ -1,3 +1,4 @@
+import { StyleSheet } from 'react-native'
 import styled from 'styled-components/native'
 import COLORS from '../../styles/colors'
 
@@ -47,7 +48,7 @@ export const BannerButton = styled.TouchableOpacity`
 `
 
 export const Banner = styled.Image`
-  height: 150px;
+  height: 180px;
   border-radius: 7px;
   margin: 0 14px;
 `
@@ -56,3 +57,15 @@ export const SliderMovie = styled.FlatList`
   height: 230px;
   padding: 0 14px;
 `
+
+const styles = StyleSheet.create({
+  loading: {
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
+  },
+})
+
+export default styles

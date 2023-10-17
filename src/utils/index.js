@@ -10,6 +10,12 @@ const arraySize = (size, array) => {
   return arrayTemp;
 };
 
+// Generates a random number based in array size
+const arrayRandomIndex = (array) => {
+  return Math.floor(Math.random() * array.length);
+};
+
 module.exports = {
   arraySize,
+  arrayRandomIndex,
 };

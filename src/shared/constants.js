@@ -3,3 +3,5 @@ export const URL_MOVIES_DB = {
   popular: '/movie/popular',
   top_rated: '/movie/top_rated',
 };
+
+export const MOVIE_POSTER_PATH_URL = 'https://image.tmdb.org/t/p/original';
