@@ -1,6 +1,7 @@
 import { StyleSheet } from 'react-native'
 import styled from 'styled-components/native'
 import COLORS from '../../styles/colors'
+import { DEFAULT_PADDING } from '../../shared/constants'
 
 const defaultHeightSize = '50px'
 
@@ -15,7 +16,7 @@ export const SearchContainer = styled.View`
   width: 100%;
   height: ${defaultHeightSize};
   align-items: center;
-  padding: 0 14px;
+  ${DEFAULT_PADDING};
   margin-bottom: 8px;
 `
 
@@ -55,7 +56,7 @@ export const Banner = styled.Image`
 
 export const SliderMovie = styled.FlatList`
   height: 230px;
-  padding: 0 14px;
+  ${DEFAULT_PADDING};
 `
 
 const styles = StyleSheet.create({

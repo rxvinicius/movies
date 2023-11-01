@@ -21,6 +21,8 @@
     "react-native-reanimated": "~3.3.0",
     "react-native-safe-area-context": "^4.7.2",
     "react-native-screens": "^3.25.0",
+    "react-native-stars": "^1.2.2",
+    "react-native-webview": "^13.6.2",
     "styled-components": "^6.0.8"
   },
   "devDependencies": {
