@@ -1,5 +1,4 @@
 import { createDrawerNavigator } from '@react-navigation/drawer'
-import Home from '../pages/Home'
 import Movies from '../pages/Movies'
 import StackRoutes from './StackRoutes'
 import COLORS from '../styles/colors'

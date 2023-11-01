@@ -5,12 +5,16 @@ class MoviesService {
     this.api = api;
   }
 
-  getMovie(url) {
-    return this.api.get('/movies/get-movie', {
+  getMoviesList(url) {
+    return this.api.get('/movies/get-movies-list', {
       params: {
         URLMovieDB: url,
       },
     });
+  }
+
+  getMovie(id) {
+    return this.api.get(`/movies/get-movie/${id}`);
   }
 
 }

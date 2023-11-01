@@ -10,11 +10,11 @@ import Ionicons from '@expo/vector-icons/Ionicons'
 import { MOVIE_POSTER_PATH_URL } from '../../shared/constants';
 
 export default function SliderItem(params) {
-  const { data } = params;
+  const { data, navigatePage } = params;
   const { original_title, poster_path, vote_average } = data;
 
   return (
-    <Container activeOpacity={0.7}>
+    <Container activeOpacity={0.7} onPress={navigatePage}>
       <BannerItem
         source={{ uri: `${MOVIE_POSTER_PATH_URL}${poster_path}` }}
       />

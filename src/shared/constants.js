@@ -5,3 +5,7 @@ export const URL_MOVIES_DB = {
 };
 
 export const MOVIE_POSTER_PATH_URL = 'https://image.tmdb.org/t/p/original';
+
+export const DEFAULT_SINGLE_PADDING = '14px';
+
+export const DEFAULT_PADDING = `padding: 0 ${DEFAULT_SINGLE_PADDING}`;
