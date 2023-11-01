@@ -1,9 +1,8 @@
-import { useEffect, useState } from 'react'
-import { ScrollView, ActivityIndicator } from 'react-native'
-import Header from '../../components/Header'
-import Feather from '@expo/vector-icons/Feather'
-import styles,
-{
+import { useEffect, useState } from 'react';
+import { ScrollView, ActivityIndicator } from 'react-native';
+import Header from '../../components/Header';
+import Feather from '@expo/vector-icons/Feather';
+import styles, {
   Container,
   SearchContainer,
   Input,
@@ -12,13 +11,13 @@ import styles,
   BannerButton,
   Banner,
   SliderMovie,
-} from './styles'
-import COLORS from '../../styles/colors'
-import SliderItem from '../../components/SliderItem'
-import MoviesService from '../../services/MoviesService'
-import { MOVIE_POSTER_PATH_URL, URL_MOVIES_DB } from '../../shared/constants'
-import { arraySize, arrayRandomIndex } from '../../utils'
-import { useNavigation } from '@react-navigation/native'
+} from './styles';
+import COLORS from '../../styles/colors';
+import SliderItem from '../../components/SliderItem';
+import MoviesService from '../../services/MoviesService';
+import { MOVIE_POSTER_PATH_URL, URL_MOVIES_DB } from '../../shared/constants';
+import { arraySize, arrayRandomIndex } from '../../utils';
+import { useNavigation } from '@react-navigation/native';
 
 export default function Home() {
   const navigation = useNavigation();
@@ -30,7 +29,7 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
 
   function navigateDetailsMovie(id) {
-    navigation.navigate('DetailsMovie', { id })
+    navigation.navigate('DetailsMovie', { id });
   }
 
   useEffect(() => {
@@ -43,11 +42,11 @@ export default function Home() {
         moviesService.getMoviesList(URL_MOVIES_DB.popular),
         moviesService.getMoviesList(URL_MOVIES_DB.top_rated),
       ])
-      .catch((error) => {
-        console.log('error ->', error);
-        // to do: https://trello.com/c/SZtcOsFN/3-implement-error-screen
-      })
-      .finally(() => setLoading(false));
+        .catch(error => {
+          console.log('error ->', error);
+          // to do: https://trello.com/c/SZtcOsFN/3-implement-error-screen
+        })
+        .finally(() => setLoading(false));
 
       if (isActive) {
         setBannerMovie(nowData.data.results[arrayRandomIndex(nowData.data.results)]);
@@ -61,38 +60,32 @@ export default function Home() {
     return () => {
       isActive = false;
       ac.abort();
-    }
-  }, [])
+    };
+  }, []);
 
   if (loading) {
     return (
       <Container>
-        <ActivityIndicator size='large' color={COLORS.WHITE} style={styles.loading} />
+        <ActivityIndicator size="large" color={COLORS.WHITE} style={styles.loading} />
       </Container>
     );
   }
 
   return (
     <Container>
-      <Header title='React Prime' />
+      <Header title="React Prime" />
 
       <SearchContainer>
-        <Input
-          placeholder='Type a movie name'
-          placeholderTextColor={COLORS.WHITE}
-        />
+        <Input placeholder="Type a movie name" placeholderTextColor={COLORS.WHITE} />
         <SearchButton>
-          <Feather name='search' size={30} color={COLORS.WHITE} />
+          <Feather name="search" size={30} color={COLORS.WHITE} />
         </SearchButton>
       </SearchContainer>
 
       <ScrollView showsVerticalScrollIndicator={false}>
         <Title>Trending</Title>
         <BannerButton activeOpacity={0.8} onPress={() => navigateDetailsMovie(bannerMovie.id)}>
-          <Banner
-            resizeMethod='resize'
-            source={{ uri: `${MOVIE_POSTER_PATH_URL}${bannerMovie.backdrop_path}` }}
-          />
+          <Banner resizeMethod="resize" source={{ uri: `${MOVIE_POSTER_PATH_URL}${bannerMovie.backdrop_path}` }} />
         </BannerButton>
 
         <SliderMovie
@@ -119,5 +112,5 @@ export default function Home() {
         />
       </ScrollView>
     </Container>
-  )
+  );
 }
