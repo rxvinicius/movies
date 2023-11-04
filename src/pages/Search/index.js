@@ -1,10 +1,9 @@
 import { useEffect, useState } from 'react';
 import { Container, ListMovies } from './styles';
 import { useNavigation, useRoute } from '@react-navigation/native';
-import { ActivityIndicator } from 'react-native';
-import COLORS from '../../styles/colors';
 import MoviesService from '../../services/MoviesService';
 import SearchItem from './components/SearchItem';
+import Loading from '../../components/Loading';
 
 export default function Search() {
   const navigation = useNavigation();
@@ -51,7 +50,7 @@ export default function Search() {
   if (loading) {
     return (
       <Container>
-        <ActivityIndicator size="large" color={COLORS.WHITE} />
+        <Loading />
       </Container>
     );
   }

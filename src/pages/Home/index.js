@@ -1,23 +1,13 @@
 import { useEffect, useState } from 'react';
-import { ScrollView, ActivityIndicator } from 'react-native';
-import Header from '../../components/Header';
-import Feather from '@expo/vector-icons/Feather';
-import styles, {
-  Container,
-  SearchContainer,
-  Input,
-  SearchButton,
-  Title,
-  BannerButton,
-  Banner,
-  SliderMovie,
-} from './styles';
-import COLORS from '../../styles/colors';
-import SliderItem from '../../components/SliderItem';
-import MoviesService from '../../services/MoviesService';
+import { ScrollView } from 'react-native';
+import { Container, SearchContainer, Input, SearchButton, Title, BannerButton, Banner, SliderMovie } from './styles';
+import { Header, SliderItem, Loading } from '../../components';
 import { MOVIE_POSTER_PATH_URL, URL_MOVIES_DB } from '../../shared/constants';
 import { arraySize, arrayRandomIndex } from '../../utils';
+import COLORS from '../../styles/colors';
 import { useNavigation } from '@react-navigation/native';
+import MoviesService from '../../services/MoviesService';
+import Feather from '@expo/vector-icons/Feather';
 
 export default function Home() {
   const navigation = useNavigation();
@@ -74,7 +64,7 @@ export default function Home() {
   if (loading) {
     return (
       <Container>
-        <ActivityIndicator size="large" color={COLORS.WHITE} style={styles.loading} />
+        <Loading />
       </Container>
     );
   }

@@ -18,7 +18,8 @@ import { Feather, Ionicons } from '@expo/vector-icons';
 import MoviesService from '../../services/MoviesService';
 import { MOVIE_POSTER_PATH_URL } from '../../shared/constants';
 import Stars from 'react-native-stars';
-import { Genres, ModalLink, Star } from '../../components';
+import { Genres, Loading, ModalLink, Star } from '../../components';
+import { getVoteAverage } from '../../utils';
 
 export default function DetailsMovie() {
   const navigation = useNavigation();
@@ -54,6 +55,14 @@ export default function DetailsMovie() {
     };
   }, []);
 
+  if (loading) {
+    return (
+      <Container>
+        <Loading />
+      </Container>
+    );
+  }
+
   return (
     <Container>
       <Header>
@@ -86,8 +95,7 @@ export default function DetailsMovie() {
           halfStar={<Star size="large" variant="half" />}
           disabled={true}
         />
-
-        <Rate>{movie?.vote_average?.toFixed(2)}/10</Rate>
+        <Rate>{getVoteAverage(movie)}</Rate>
       </ContentArea>
 
       <ListGenres
