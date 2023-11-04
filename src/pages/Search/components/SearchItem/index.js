@@ -3,6 +3,7 @@ import { Container, Banner, Title, RateContainer, Rate } from './styles';
 import ImageNotFoundImg from '../../../../assets/image_not_found.png';
 import Star from '../../../../components/Star';
 import PropTypes from 'prop-types';
+import { getVoteAverage } from '../../../../utils';
 
 export default function SearchItem(props) {
   const { data, navigatePage } = props;
@@ -21,7 +22,7 @@ export default function SearchItem(props) {
 
       <RateContainer>
         <Star />
-        <Rate>{data?.vote_average}/10</Rate>
+        <Rate>{getVoteAverage(data)}</Rate>
       </RateContainer>
     </Container>
   );

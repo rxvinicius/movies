@@ -5,5 +5,5 @@ export default function Genres({ data }) {
     <Container>
       <Name>{data.name}</Name>
     </Container>
-  )
+  );
 }

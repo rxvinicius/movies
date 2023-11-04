@@ -1,10 +1,12 @@
 import { StyleSheet } from 'react-native';
-import COLORS from '../styles/colors';
 
 const styles = StyleSheet.create({
-  drawerStyle: {
-    backgroundColor: COLORS.DARK,
-    paddingTop: 20,
+  loading: {
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
   },
 });
 

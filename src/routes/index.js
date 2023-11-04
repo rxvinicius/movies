@@ -1,30 +1,24 @@
-import { createDrawerNavigator } from '@react-navigation/drawer'
-import Movies from '../pages/Movies'
-import StackRoutes from './StackRoutes'
-import COLORS from '../styles/colors'
-import { MaterialCommunityIcons } from '@expo/vector-icons'
-import styles from './styles'
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import Movies from '../pages/Movies';
+import StackRoutes from './StackRoutes';
+import COLORS from '../styles/colors';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import styles from './styles';
 
-const Drawer = createDrawerNavigator()
+const Drawer = createDrawerNavigator();
 
 const DrawerIcon = (props, screen) => {
-  const { focused, size, color } = props
+  const { focused, size, color } = props;
 
   function iconName() {
-    if (screen == 'Home')
-      return focused ? 'movie-open' : 'movie-outline'
-
-    return focused ? 'archive' : 'archive-outline'
+    if (screen == 'Home') {
+      return focused ? 'movie-open' : 'movie-outline';
+    }
+    return focused ? 'archive' : 'archive-outline';
   }
 
-  return (
-    <MaterialCommunityIcons
-      name={iconName()}
-      size={size}
-      color={color}
-    />
-  )
-}
+  return <MaterialCommunityIcons name={iconName()} size={size} color={color} />;
+};
 
 export default function Routes() {
   return (
@@ -38,21 +32,21 @@ export default function Routes() {
       }}
     >
       <Drawer.Screen
-        name='HomeDrawer'
+        name="HomeDrawer"
         component={StackRoutes}
         options={{
           title: 'Home',
-          drawerIcon: (props) => DrawerIcon(props, 'Home')
+          drawerIcon: props => DrawerIcon(props, 'Home'),
         }}
       />
       <Drawer.Screen
-        name='Movies'
+        name="Movies"
         component={Movies}
         options={{
           title: 'Movies',
-          drawerIcon: (props) => DrawerIcon(props, 'Movies')
+          drawerIcon: props => DrawerIcon(props, 'Movies'),
         }}
       />
     </Drawer.Navigator>
-  )
+  );
 }
