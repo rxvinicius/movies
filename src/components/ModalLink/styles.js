@@ -7,19 +7,19 @@ export const BackButton = styled.TouchableOpacity`
   background-color: ${COLORS.SECONDARY};
   flex-direction: row;
   align-items: center;
-`
+`;
 
 export const Name = styled.Text`
   color: ${COLORS.WHITE};
   margin-left: 8px;
   font-size: 18px;
   font-weight: bold;
-`
+`;
 
 const styles = StyleSheet.create({
   webview: {
     flex: 1,
   },
-})
+});
 
-export default styles
+export default styles;
