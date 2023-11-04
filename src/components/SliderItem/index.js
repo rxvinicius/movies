@@ -1,13 +1,6 @@
-import {
-  Container,
-  BannerItem,
-  Title,
-  RateContainer,
-  Rate,
-} from './styles'
-import COLORS from '../../styles/colors'
-import Ionicons from '@expo/vector-icons/Ionicons'
+import { Container, BannerItem, Title, RateContainer, Rate } from './styles';
 import { MOVIE_POSTER_PATH_URL } from '../../shared/constants';
+import Star from '../Star';
 
 export default function SliderItem(params) {
   const { data, navigatePage } = params;
@@ -15,13 +8,11 @@ export default function SliderItem(params) {
 
   return (
     <Container activeOpacity={0.7} onPress={navigatePage}>
-      <BannerItem
-        source={{ uri: `${MOVIE_POSTER_PATH_URL}${poster_path}` }}
-      />
+      <BannerItem source={{ uri: `${MOVIE_POSTER_PATH_URL}${poster_path}` }} />
 
       <Title numberOfLines={1}>{original_title}</Title>
       <RateContainer>
-        <Ionicons name='md-star' size={12} color={COLORS.YELLOW} />
+        <Star />
         <Rate>{vote_average}/10</Rate>
       </RateContainer>
     </Container>
