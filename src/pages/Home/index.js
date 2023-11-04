@@ -27,10 +27,18 @@ export default function Home() {
   const [popularMovies, setPopularMovies] = useState([]);
   const [topMovies, setTopMovies] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [findMovieInput, setFindMovieInput] = useState('');
 
   function navigateDetailsMovie(id) {
     navigation.navigate('DetailsMovie', { id });
   }
+
+  const handleSearchMovie = () => {
+    if (findMovieInput && findMovieInput.trim() !== '') {
+      navigation.navigate('Search', { name: findMovieInput });
+      setFindMovieInput('');
+    }
+  };
 
   useEffect(() => {
     let isActive = true;
@@ -76,8 +84,13 @@ export default function Home() {
       <Header title="React Prime" />
 
       <SearchContainer>
-        <Input placeholder="Type a movie name" placeholderTextColor={COLORS.WHITE} />
-        <SearchButton>
+        <Input
+          value={findMovieInput}
+          placeholder="Type a movie name"
+          placeholderTextColor={COLORS.WHITE}
+          onChangeText={text => setFindMovieInput(text)}
+        />
+        <SearchButton onPress={handleSearchMovie}>
           <Feather name="search" size={30} color={COLORS.WHITE} />
         </SearchButton>
       </SearchContainer>

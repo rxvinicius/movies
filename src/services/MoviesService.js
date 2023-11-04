@@ -17,6 +17,9 @@ class MoviesService {
     return this.api.get(`/movies/get-movie/${id}`);
   }
 
+  getSearchMovie(name) {
+    return this.api.get(`/movies/get-search-movie/${name}`);
+  }
 }
 
 export default MoviesService;
