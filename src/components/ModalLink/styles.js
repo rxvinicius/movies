@@ -1,9 +1,11 @@
+import { Platform } from 'react-native';
 import styled from 'styled-components/native';
 import COLORS from '../../styles/colors';
 import { StyleSheet } from 'react-native';
 
 export const BackButton = styled.TouchableOpacity`
   padding: 10px;
+  padding-top: ${Platform.OS === 'ios' ? 40 : 5}px;
   background-color: ${COLORS.SECONDARY};
   flex-direction: row;
   align-items: center;

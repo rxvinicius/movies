@@ -74,7 +74,7 @@ export default function DetailsMovie() {
         </HeaderButton>
       </Header>
 
-      <Banner resizeMethod="resize" source={{ uri: `${MOVIE_POSTER_PATH_URL}${movie.poster_path}` }} />
+      <Banner source={{ uri: `${MOVIE_POSTER_PATH_URL}${movie.backdrop_path}` }} />
 
       {movie?.homepage && (
         <ButtonLink onPress={() => setOpenLink(true)}>
