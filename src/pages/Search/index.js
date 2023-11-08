@@ -3,7 +3,7 @@ import { Container, ListMovies } from './styles';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import MoviesService from '../../services/MoviesService';
 import SearchItem from './components/SearchItem';
-import Loading from '../../components/Loading';
+import { Loading, Error } from '../../components';
 
 export default function Search() {
   const navigation = useNavigation();
@@ -11,6 +11,7 @@ export default function Search() {
   const moviesService = new MoviesService();
   const [movie, setMovie] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
 
   function navigateDetailsMovie(item) {
     if (item.release_date !== '') {
@@ -32,6 +33,7 @@ export default function Search() {
           }
         })
         .catch(error => {
+          setError(true);
           console.log('error ->', error);
         })
         .finally(() => setLoading(false));
@@ -47,22 +49,19 @@ export default function Search() {
     };
   }, []);
 
-  if (loading) {
-    return (
-      <Container>
-        <Loading />
-      </Container>
-    );
-  }
+  const render = () => {
+    if (error) return <Error />;
+    if (loading) return <Loading />;
 
-  return (
-    <Container>
+    return (
       <ListMovies
         data={movie}
         showsVerticalScrollIndicator={false}
         keyExtractor={item => String(item.id)}
         renderItem={({ item }) => <SearchItem data={item} navigatePage={() => navigateDetailsMovie(item)} />}
       />
-    </Container>
-  );
+    );
+  };
+
+  return <Container>{render()}</Container>;
 }
