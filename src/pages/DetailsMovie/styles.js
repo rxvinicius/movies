@@ -2,7 +2,7 @@ import { Platform } from 'react-native';
 import styled from 'styled-components/native';
 import COLORS from '../../styles/colors';
 import { DEFAULT_PADDING, DEFAULT_SINGLE_PADDING } from '../../shared/constants';
-const bannerHeight = 250;
+const bannerHeight = 260;
 
 export const Container = styled.View`
   flex: 1;

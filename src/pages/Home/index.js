@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { ScrollView } from 'react-native';
 import { Container, SearchContainer, Input, SearchButton, Title, BannerButton, Banner, SliderMovie } from './styles';
-import { Header, SliderItem, Loading } from '../../components';
+import { Header, SliderItem, Loading, Error } from '../../components';
 import { MOVIE_POSTER_PATH_URL, URL_MOVIES_DB } from '../../shared/constants';
 import { arraySize, arrayRandomIndex } from '../../utils';
 import COLORS from '../../styles/colors';
@@ -10,6 +10,7 @@ import MoviesService from '../../services/MoviesService';
 import Feather from '@expo/vector-icons/Feather';
 
 export default function Home() {
+  const title = 'React Prime';
   const navigation = useNavigation();
   const moviesService = new MoviesService();
   const [bannerMovie, setBannerMovie] = useState({});
@@ -17,6 +18,7 @@ export default function Home() {
   const [popularMovies, setPopularMovies] = useState([]);
   const [topMovies, setTopMovies] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
   const [findMovieInput, setFindMovieInput] = useState('');
 
   function navigateDetailsMovie(id) {
@@ -41,8 +43,8 @@ export default function Home() {
         moviesService.getMoviesList(URL_MOVIES_DB.top_rated),
       ])
         .catch(error => {
+          setError(true);
           console.log('error ->', error);
-          // to do: https://trello.com/c/SZtcOsFN/3-implement-error-screen
         })
         .finally(() => setLoading(false));
 
@@ -61,59 +63,66 @@ export default function Home() {
     };
   }, []);
 
-  if (loading) {
+  const render = () => {
+    if (error) {
+      return (
+        <>
+          <Header title={title} />
+          <Error />
+        </>
+      );
+    }
+
+    if (loading) return <Loading />;
+
     return (
-      <Container>
-        <Loading />
-      </Container>
+      <>
+        <Header title={title} />
+
+        <SearchContainer>
+          <Input
+            value={findMovieInput}
+            placeholder="Type a movie name"
+            placeholderTextColor={COLORS.WHITE}
+            onChangeText={text => setFindMovieInput(text)}
+          />
+          <SearchButton onPress={handleSearchMovie}>
+            <Feather name="search" size={30} color={COLORS.WHITE} />
+          </SearchButton>
+        </SearchContainer>
+
+        <ScrollView showsVerticalScrollIndicator={false}>
+          <Title>Trending</Title>
+          <BannerButton activeOpacity={0.8} onPress={() => navigateDetailsMovie(bannerMovie.id)}>
+            <Banner resizeMethod="resize" source={{ uri: `${MOVIE_POSTER_PATH_URL}${bannerMovie.backdrop_path}` }} />
+          </BannerButton>
+
+          <SliderMovie
+            horizontal={true}
+            showsHorizontalScrollIndicator={false}
+            data={nowMovies}
+            renderItem={({ item }) => <SliderItem data={item} navigatePage={() => navigateDetailsMovie(item.id)} />}
+          />
+
+          <Title>Popular</Title>
+          <SliderMovie
+            horizontal={true}
+            showsHorizontalScrollIndicator={false}
+            data={popularMovies}
+            renderItem={({ item }) => <SliderItem data={item} navigatePage={() => navigateDetailsMovie(item.id)} />}
+          />
+
+          <Title>Top rated</Title>
+          <SliderMovie
+            horizontal={true}
+            showsHorizontalScrollIndicator={false}
+            data={topMovies}
+            renderItem={({ item }) => <SliderItem data={item} navigatePage={() => navigateDetailsMovie(item.id)} />}
+          />
+        </ScrollView>
+      </>
     );
-  }
+  };
 
-  return (
-    <Container>
-      <Header title="React Prime" />
-
-      <SearchContainer>
-        <Input
-          value={findMovieInput}
-          placeholder="Type a movie name"
-          placeholderTextColor={COLORS.WHITE}
-          onChangeText={text => setFindMovieInput(text)}
-        />
-        <SearchButton onPress={handleSearchMovie}>
-          <Feather name="search" size={30} color={COLORS.WHITE} />
-        </SearchButton>
-      </SearchContainer>
-
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <Title>Trending</Title>
-        <BannerButton activeOpacity={0.8} onPress={() => navigateDetailsMovie(bannerMovie.id)}>
-          <Banner resizeMethod="resize" source={{ uri: `${MOVIE_POSTER_PATH_URL}${bannerMovie.backdrop_path}` }} />
-        </BannerButton>
-
-        <SliderMovie
-          horizontal={true}
-          showsHorizontalScrollIndicator={false}
-          data={nowMovies}
-          renderItem={({ item }) => <SliderItem data={item} navigatePage={() => navigateDetailsMovie(item.id)} />}
-        />
-
-        <Title>Popular</Title>
-        <SliderMovie
-          horizontal={true}
-          showsHorizontalScrollIndicator={false}
-          data={popularMovies}
-          renderItem={({ item }) => <SliderItem data={item} navigatePage={() => navigateDetailsMovie(item.id)} />}
-        />
-
-        <Title>Top rated</Title>
-        <SliderMovie
-          horizontal={true}
-          showsHorizontalScrollIndicator={false}
-          data={topMovies}
-          renderItem={({ item }) => <SliderItem data={item} navigatePage={() => navigateDetailsMovie(item.id)} />}
-        />
-      </ScrollView>
-    </Container>
-  );
+  return <Container>{render()}</Container>;
 }

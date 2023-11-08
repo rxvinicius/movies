@@ -18,7 +18,7 @@ import { Feather, Ionicons } from '@expo/vector-icons';
 import MoviesService from '../../services/MoviesService';
 import { MOVIE_POSTER_PATH_URL } from '../../shared/constants';
 import Stars from 'react-native-stars';
-import { Genres, Loading, ModalLink, Star } from '../../components';
+import { Error, Genres, Loading, ModalLink, Star } from '../../components';
 import { getVoteAverage } from '../../utils';
 
 export default function DetailsMovie() {
@@ -29,6 +29,16 @@ export default function DetailsMovie() {
   const [error, setError] = useState(false);
   const [openLink, setOpenLink] = useState(false);
   const moviesService = new MoviesService();
+
+  const BackButton = () => {
+    return (
+      <>
+        <HeaderButton activeOpacity={0.7} onPress={() => navigation.goBack()}>
+          <Feather name="arrow-left" size={28} color={COLORS.WHITE} />
+        </HeaderButton>
+      </>
+    );
+  };
 
   useEffect(() => {
     let isActive = true;
@@ -55,64 +65,71 @@ export default function DetailsMovie() {
     };
   }, []);
 
-  if (loading) {
+  const render = () => {
+    if (error) {
+      return (
+        <>
+          <Header>
+            <BackButton />
+          </Header>
+          <Error />
+        </>
+      );
+    }
+
+    if (loading) return <Loading />;
+
     return (
-      <Container>
-        <Loading />
-      </Container>
-    );
-  }
+      <>
+        <Header>
+          <BackButton />
+          <HeaderButton>
+            <Ionicons name="bookmark" size={28} color={COLORS.WHITE} />
+          </HeaderButton>
+        </Header>
 
-  return (
-    <Container>
-      <Header>
-        <HeaderButton activeOpacity={0.7} onPress={() => navigation.goBack()}>
-          <Feather name="arrow-left" size={28} color={COLORS.WHITE} />
-        </HeaderButton>
-        <HeaderButton>
-          <Ionicons name="bookmark" size={28} color={COLORS.WHITE} />
-        </HeaderButton>
-      </Header>
+        <Banner source={{ uri: `${MOVIE_POSTER_PATH_URL}${movie.backdrop_path}` }} />
 
-      <Banner source={{ uri: `${MOVIE_POSTER_PATH_URL}${movie.backdrop_path}` }} />
+        {movie?.homepage && (
+          <ButtonLink onPress={() => setOpenLink(true)}>
+            <Feather name="link" size={24} color={COLORS.WHITE} />
+          </ButtonLink>
+        )}
 
-      {movie?.homepage && (
-        <ButtonLink onPress={() => setOpenLink(true)}>
-          <Feather name="link" size={24} color={COLORS.WHITE} />
-        </ButtonLink>
-      )}
+        <Title numberOfLines={2}>{movie.title}</Title>
 
-      <Title numberOfLines={2}>{movie.title}</Title>
+        <ContentArea>
+          <Stars
+            default={movie.vote_average}
+            count={10}
+            half={true}
+            starSize={20}
+            fullStar={<Star size="large" />}
+            emptyStar={<Star size="large" variant="outline" />}
+            halfStar={<Star size="large" variant="half" />}
+            disabled={true}
+          />
+          <Rate>{getVoteAverage(movie)}</Rate>
+        </ContentArea>
 
-      <ContentArea>
-        <Stars
-          default={movie.vote_average}
-          count={10}
-          half={true}
-          starSize={20}
-          fullStar={<Star size="large" />}
-          emptyStar={<Star size="large" variant="outline" />}
-          halfStar={<Star size="large" variant="half" />}
-          disabled={true}
+        <ListGenres
+          data={movie?.genres}
+          horizontal={true}
+          showsHorizontalScrollIndicator={false}
+          renderItem={({ item }) => <Genres data={item} />}
         />
-        <Rate>{getVoteAverage(movie)}</Rate>
-      </ContentArea>
 
-      <ListGenres
-        data={movie?.genres}
-        horizontal={true}
-        showsHorizontalScrollIndicator={false}
-        renderItem={({ item }) => <Genres data={item} />}
-      />
+        <ScrollView showsVerticalScrollIndicator={false}>
+          <Title>Description</Title>
+          <Description>{movie.overview ? movie.overview : `description wasn't found`}</Description>
+        </ScrollView>
 
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <Title>Description</Title>
-        <Description>{movie.overview ? movie.overview : `description wasn't found`}</Description>
-      </ScrollView>
+        <Modal animationType="slide" transparent={true} visible={openLink}>
+          <ModalLink link={movie?.homepage} title={movie?.title} closeModal={() => setOpenLink(false)} />
+        </Modal>
+      </>
+    );
+  };
 
-      <Modal animationType="slide" transparent={true} visible={openLink}>
-        <ModalLink link={movie?.homepage} title={movie?.title} closeModal={() => setOpenLink(false)} />
-      </Modal>
-    </Container>
-  );
+  return <Container>{render()}</Container>;
 }
