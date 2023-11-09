@@ -20,15 +20,17 @@ import { MOVIE_POSTER_PATH_URL } from '../../shared/constants';
 import Stars from 'react-native-stars';
 import { Error, Genres, Loading, ModalLink, Star } from '../../components';
 import { getVoteAverage } from '../../utils';
+import { setSavedMovie, hasMovie, removeSavedMovie } from '../../utils/moviesStorage';
 
 export default function DetailsMovie() {
   const navigation = useNavigation();
+  const moviesService = new MoviesService();
   const route = useRoute();
   const [movie, setMovie] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [openLink, setOpenLink] = useState(false);
-  const moviesService = new MoviesService();
+  const [favoritedMovie, setFavoritedMovie] = useState(false);
 
   const BackButton = () => {
     return (
@@ -40,6 +42,17 @@ export default function DetailsMovie() {
     );
   };
 
+  const handleFavoriteMovie = async () => {
+    const found = await hasMovie(movie.id);
+    setFavoritedMovie(!found);
+
+    if (found) {
+      await removeSavedMovie(movie.id);
+    } else {
+      await setSavedMovie(movie);
+    }
+  };
+
   useEffect(() => {
     let isActive = true;
     const ac = new AbortController();
@@ -47,8 +60,13 @@ export default function DetailsMovie() {
     async function getMovie() {
       moviesService
         .getMovie(route.params?.id)
-        .then(response => {
-          if (isActive) setMovie(response.data);
+        .then(async response => {
+          const { data } = response;
+
+          if (isActive) {
+            setMovie(data);
+            setFavoritedMovie(await hasMovie(data.id));
+          }
         })
         .catch(error => {
           console.log('Error', error);
@@ -83,8 +101,8 @@ export default function DetailsMovie() {
       <>
         <Header>
           <BackButton />
-          <HeaderButton>
-            <Ionicons name="bookmark" size={28} color={COLORS.WHITE} />
+          <HeaderButton onPress={handleFavoriteMovie}>
+            <Ionicons name={`bookmark${favoritedMovie ? '' : '-outline'}`} size={28} color={COLORS.WHITE} />
           </HeaderButton>
         </Header>
 
