@@ -8,7 +8,7 @@ const getSavedMovies = async () => {
 
 const setSavedMovie = async newMovie => {
   if (!newMovie) return;
-  let savedMovies = await getSavedMovies(MOVIE_STORAGE);
+  let savedMovies = await getSavedMovies();
   const hasMovie = savedMovies.some(movie => movie.id === newMovie.id);
   if (hasMovie) return;
   savedMovies.push(newMovie);
@@ -17,7 +17,7 @@ const setSavedMovie = async newMovie => {
 
 const removeSavedMovie = async id => {
   if (!id) return;
-  const savedMovies = await getSavedMovies(MOVIE_STORAGE);
+  const savedMovies = await getSavedMovies();
   const myMovies = savedMovies.filter(movie => movie.id !== id);
   await AsyncStorage.setItem(MOVIE_STORAGE, JSON.stringify(myMovies));
   return myMovies;
@@ -25,7 +25,7 @@ const removeSavedMovie = async id => {
 
 const hasMovie = async id => {
   if (!id) return;
-  const savedMovies = await getSavedMovies(MOVIE_STORAGE);
+  const savedMovies = await getSavedMovies();
   return savedMovies.some(movie => movie.id === id);
 };
 

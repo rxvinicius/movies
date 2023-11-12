@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 import { Container, ListMovies } from './styles';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import MoviesService from '../../services/MoviesService';
+import { Loading, Error, Empty } from '../../components';
 import SearchItem from './components/SearchItem';
-import { Loading, Error } from '../../components';
 
 export default function Search() {
   const navigation = useNavigation();
@@ -12,6 +12,7 @@ export default function Search() {
   const [movie, setMovie] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+  const [noMovies, setNoMovies] = useState(false);
 
   function navigateDetailsMovie(item) {
     if (item.release_date !== '') {
@@ -29,7 +30,9 @@ export default function Search() {
         .getSearchMovie(movieName)
         .then(response => {
           if (isActive) {
-            setMovie(response.data.results);
+            const { results } = response.data;
+            setMovie(results);
+            setNoMovies(results && results.length === 0);
           }
         })
         .catch(error => {
@@ -52,6 +55,7 @@ export default function Search() {
   const render = () => {
     if (error) return <Error />;
     if (loading) return <Loading />;
+    if (noMovies) return <Empty />;
 
     return (
       <ListMovies

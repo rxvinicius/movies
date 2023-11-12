@@ -1,6 +1,5 @@
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import Movies from '../pages/Movies';
-import StackRoutes from './StackRoutes';
+import { StackRoutes, MoviesStackRoutes } from './StackRoutes';
 import COLORS from '../styles/colors';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import styles from './styles';
@@ -30,6 +29,7 @@ export default function Routes() {
         drawerActiveTintColor: COLORS.WHITE,
         drawerInactiveTintColor: COLORS.WHITE,
       }}
+      backBehavior="history"
     >
       <Drawer.Screen
         name="HomeDrawer"
@@ -40,8 +40,8 @@ export default function Routes() {
         }}
       />
       <Drawer.Screen
-        name="Movies"
-        component={Movies}
+        name="MoviesDrawer"
+        component={MoviesStackRoutes}
         options={{
           title: 'Movies',
           drawerIcon: props => DrawerIcon(props, 'Movies'),

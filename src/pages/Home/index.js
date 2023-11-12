@@ -50,9 +50,9 @@ export default function Home() {
 
       if (isActive) {
         setBannerMovie(nowData.data.results[arrayRandomIndex(nowData.data.results)]);
-        setNowMovies(arraySize(15, nowData.data.results));
-        setPopularMovies(arraySize(10, popularData.data.results));
-        setTopMovies(arraySize(10, topRatedData.data.results));
+        setNowMovies(nowData.data.results);
+        setPopularMovies(arraySize(15, popularData.data.results));
+        setTopMovies(arraySize(15, topRatedData.data.results));
       }
     }
 
