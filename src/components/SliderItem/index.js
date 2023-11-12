@@ -6,13 +6,13 @@ import PropTypes from 'prop-types';
 
 export default function SliderItem(params) {
   const { data, navigatePage } = params;
-  const { original_title, poster_path } = data;
+  const { title, poster_path } = data;
 
   return (
     <Container activeOpacity={0.7} onPress={navigatePage}>
       <BannerItem source={{ uri: `${MOVIE_POSTER_PATH_URL}${poster_path}` }} />
 
-      <Title numberOfLines={1}>{original_title}</Title>
+      <Title numberOfLines={1}>{title}</Title>
       <RateContainer>
         <Star />
         <Rate>{getVoteAverage(data)}</Rate>
