@@ -1,8 +1,8 @@
-import { Platform } from 'react-native';
+import { Platform, StyleSheet } from 'react-native';
 import styled from 'styled-components/native';
 import COLORS from '../../styles/colors';
 import { DEFAULT_PADDING, DEFAULT_SINGLE_PADDING } from '../../shared/constants';
-const bannerHeight = 260;
+const bannerHeight = 280;
 
 export const Container = styled.View`
   flex: 1;
@@ -29,11 +29,21 @@ export const HeaderButton = styled.TouchableOpacity`
   align-items: center;
 `;
 
-export const Banner = styled.Image`
-  width: 100%;
-  height: ${bannerHeight}px;
-  border-bottom-left-radius: 70px;
-  border-bottom-right-radius: 70px;
+export const Banner = styled.Image``;
+
+export const ImageNotFound = styled.View`
+  background-color: ${COLORS.LIGHT_GRAY};
+  justify-content: center;
+  align-items: center;
+`;
+
+export const TextNotFound = styled.Text`
+  color: ${COLORS.WHITE};
+  font-size: 28px;
+  font-weight: bold;
+  text-align: center;
+  line-height: 35px;
+  padding-top: 10px;
 `;
 
 export const ButtonLink = styled.TouchableOpacity`
@@ -83,3 +93,14 @@ export const Description = styled.Text`
   padding-bottom: 30px;
   line-height: 20px;
 `;
+
+const styles = StyleSheet.create({
+  banner: {
+    width: '100%',
+    height: bannerHeight,
+    borderBottomLeftRadius: 70,
+    borderBottomRightRadius: 70,
+  },
+});
+
+export default styles;

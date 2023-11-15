@@ -26,6 +26,7 @@ export default function Movies() {
   }
 
   useEffect(() => {
+    setLoading(true);
     let isActive = true;
     const ac = new AbortController();
 
