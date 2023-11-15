@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { ScrollView, Modal } from 'react-native';
-import {
+import styles, {
   Container,
   Header,
   HeaderButton,
@@ -11,6 +11,8 @@ import {
   Rate,
   ListGenres,
   Description,
+  ImageNotFound,
+  TextNotFound,
 } from './styles';
 import COLORS from '../../styles/colors';
 import { useNavigation, useRoute } from '@react-navigation/native';
@@ -106,7 +108,13 @@ export default function DetailsMovie() {
           </HeaderButton>
         </Header>
 
-        <Banner source={{ uri: `${MOVIE_POSTER_PATH_URL}${movie.backdrop_path}` }} />
+        {movie.backdrop_path ? (
+          <Banner source={{ uri: `${MOVIE_POSTER_PATH_URL}${movie.backdrop_path}` }} style={styles.banner} />
+        ) : (
+          <ImageNotFound style={styles.banner}>
+            <TextNotFound>IMAGE NOT FOUND</TextNotFound>
+          </ImageNotFound>
+        )}
 
         {movie?.homepage && (
           <ButtonLink onPress={() => setOpenLink(true)}>
