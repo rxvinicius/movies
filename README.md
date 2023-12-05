@@ -10,7 +10,7 @@ React native movies app inspired in Prime Video.
 
 * Clone this repository
 * Access the project directory
-* Override baseURL value in Api.js by your ip
+* Override baseURL value in [Api.js](src/services/Api.js) by your ip
 * Run `yarn install` to install dependencies
 * `yarn start` to start a development server from the terminal
 
