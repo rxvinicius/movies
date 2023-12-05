@@ -6,7 +6,7 @@ export default function Empty() {
   return (
     <Container>
       <MaterialCommunityIcons name="movie-off-outline" size={70} color={COLORS.WHITE} />
-      <Title>Nenhum filme encontrado</Title>
+      <Title>No movies found</Title>
     </Container>
   );
 }
