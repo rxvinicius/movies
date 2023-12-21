@@ -1,17 +1,16 @@
-import { useEffect, useState } from 'react';
-import { Header, Loading, Empty } from '../../components';
+import { Header, Empty } from '../../components';
 import { Container, ListMovies } from './styles';
-import { useNavigation, useIsFocused } from '@react-navigation/native';
-import { getSavedMovies, removeSavedMovie } from '../../utils/moviesStorage';
+import { useNavigation } from '@react-navigation/native';
 import { MyMovies } from './components';
+import { useSelector, useDispatch } from 'react-redux';
+import { getSavedMovies } from '../../redux/movies/utils';
+import { removeSavedMovie } from '../../redux/movies/actions';
 
 export default function Movies() {
   const pageTitle = 'Movies';
   const navigation = useNavigation();
-  const isFocused = useIsFocused();
-  const [movies, setMovies] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [noMovies, setNoMovies] = useState(false);
+  const dispatch = useDispatch();
+  const movies = useSelector(getSavedMovies);
 
   function navigateDetailsMovie(item) {
     if (item.release_date !== '') {
@@ -19,38 +18,12 @@ export default function Movies() {
     }
   }
 
-  async function handleRemoveMovie(item) {
-    const result = await removeSavedMovie(item.id);
-    setMovies(result);
-    setNoMovies(result && result.length === 0);
-  }
-
-  useEffect(() => {
-    setLoading(true);
-    let isActive = true;
-    const ac = new AbortController();
-
-    async function getMovies() {
-      const data = await getSavedMovies();
-      setMovies(data);
-      setNoMovies(data.length === 0);
-      setLoading(false);
-    }
-
-    if (isActive) {
-      getMovies();
-    }
-
-    return () => {
-      isActive = false;
-      ac.abort();
-    };
-  }, [isFocused]);
+  const handleRemoveMovie = movie => {
+    dispatch(removeSavedMovie(movie.id));
+  };
 
   const render = () => {
-    if (loading) return <Loading />;
-
-    if (noMovies) {
+    if (movies.length === 0) {
       return (
         <>
           <Header title={pageTitle} />

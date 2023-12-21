@@ -22,17 +22,20 @@ import { MOVIE_POSTER_PATH_URL } from '../../shared/constants';
 import Stars from 'react-native-stars';
 import { Error, Genres, Loading, ModalLink, Star } from '../../components';
 import { getVoteAverage } from '../../utils';
-import { setSavedMovie, hasMovie, removeSavedMovie } from '../../utils/moviesStorage';
+import { useDispatch, useSelector } from 'react-redux';
+import { saveMovie, removeSavedMovie } from '../../redux/movies/actions';
+import { hasMovie } from '../../redux/movies/utils';
 
 export default function DetailsMovie() {
+  const route = useRoute();
   const navigation = useNavigation();
   const moviesService = new MoviesService();
-  const route = useRoute();
+  const dispatch = useDispatch();
+  const favoritedMovie = useSelector(state => hasMovie(state, route.params?.id));
   const [movie, setMovie] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [openLink, setOpenLink] = useState(false);
-  const [favoritedMovie, setFavoritedMovie] = useState(false);
 
   const BackButton = () => {
     return (
@@ -44,14 +47,11 @@ export default function DetailsMovie() {
     );
   };
 
-  const handleFavoriteMovie = async () => {
-    const found = await hasMovie(movie.id);
-    setFavoritedMovie(!found);
-
-    if (found) {
-      await removeSavedMovie(movie.id);
+  const handleFavoriteMovie = () => {
+    if (favoritedMovie) {
+      dispatch(removeSavedMovie(movie.id));
     } else {
-      await setSavedMovie(movie);
+      dispatch(saveMovie(movie));
     }
   };
 
@@ -62,12 +62,9 @@ export default function DetailsMovie() {
     async function getMovie() {
       moviesService
         .getMovie(route.params?.id)
-        .then(async response => {
-          const { data } = response;
-
+        .then(response => {
           if (isActive) {
-            setMovie(data);
-            setFavoritedMovie(await hasMovie(data.id));
+            setMovie(response.data);
           }
         })
         .catch(error => {

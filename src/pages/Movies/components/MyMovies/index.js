@@ -21,13 +21,13 @@ class MyMovies extends PureComponent {
 
     return (
       <Container activeOpacity={0.7}>
-        <ContentArea onPress={() => navigatePage()}>
+        <ContentArea onPress={navigatePage}>
           <Banner resizeMethod="resize" source={this.getPosterPath()} />
           <Title>{data?.title}</Title>
         </ContentArea>
 
         <DeleteArea>
-          <Feather name="trash-2" size={24} color={COLORS.WHITE} onPress={() => removeMovie()} />
+          <Feather name="trash-2" size={24} color={COLORS.WHITE} onPress={removeMovie} />
         </DeleteArea>
       </Container>
     );
