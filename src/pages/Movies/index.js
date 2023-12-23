@@ -3,8 +3,8 @@ import { Container, ListMovies } from './styles';
 import { useNavigation } from '@react-navigation/native';
 import { MyMovies } from './components';
 import { useSelector, useDispatch } from 'react-redux';
-import { getSavedMovies } from '../../redux/movies/utils';
-import { removeSavedMovie } from '../../redux/movies/actions';
+import { getSavedMovies } from '../../redux/movies/selectors';
+import { removeSavedMovie } from '../../redux/movies/slice';
 
 export default function Movies() {
   const pageTitle = 'Movies';
