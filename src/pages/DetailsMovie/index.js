@@ -23,8 +23,8 @@ import Stars from 'react-native-stars';
 import { Error, Genres, Loading, ModalLink, Star } from '../../components';
 import { getVoteAverage } from '../../utils';
 import { useDispatch, useSelector } from 'react-redux';
-import { saveMovie, removeSavedMovie } from '../../redux/movies/actions';
-import { hasMovie } from '../../redux/movies/utils';
+import { saveMovie, removeSavedMovie } from '../../redux/movies/slice';
+import { hasMovie } from '../../redux/movies/selectors';
 
 export default function DetailsMovie() {
   const route = useRoute();
