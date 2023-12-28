@@ -5,8 +5,8 @@ class MoviesService {
     this.api = api;
   }
 
-  getMoviesList(url) {
-    return this.api.get('/movies/get-movies-list', {
+  getMoviesList(url, page = 1) {
+    return this.api.get(`/movies/get-movies-list?page=${page}`, {
       params: {
         URLMovieDB: url,
       },
