@@ -1,5 +1,5 @@
 // Changes the size of the array based in the params passed to the function
-const arraySize = (size, array) => {
+export const arraySize = (size, array) => {
   const arrayTemp = [];
 
   for (let i = 0; i < size; i++) {
@@ -10,18 +10,38 @@ const arraySize = (size, array) => {
 };
 
 // Generates a random number based in array size
-const arrayRandomIndex = array => {
+export const arrayRandomIndex = array => {
   return Math.floor(Math.random() * array.length);
 };
 
-const getVoteAverage = movie => {
+export const getVoteAverage = movie => {
   const { vote_average } = movie;
   const vote = vote_average || '0';
   return `${parseInt(vote)}/10`;
 };
 
-module.exports = {
+export const removeDuplicates = (originalArray, newArray, uniqueKey = 'id') => {
+  const uniqueKeyMapOriginal = new Map();
+  const uniqueKeyMapNew = new Map();
+
+  originalArray.forEach(obj => {
+    const key = obj[uniqueKey];
+    uniqueKeyMapOriginal.set(key, obj);
+  });
+
+  newArray.forEach(obj => {
+    const key = obj[uniqueKey];
+    if (!uniqueKeyMapOriginal.has(key)) {
+      uniqueKeyMapNew.set(key, obj);
+    }
+  });
+
+  return Array.from(uniqueKeyMapNew.values());
+};
+
+export default {
   arraySize,
   arrayRandomIndex,
   getVoteAverage,
+  removeDuplicates,
 };
