@@ -55,11 +55,14 @@ export default function DetailsMovie() {
     }
   };
 
-  useEffect(() => {
+  const initScreen = () => {
     let isActive = true;
     const ac = new AbortController();
 
     async function getMovie() {
+      setLoading(true);
+      setError(false);
+
       moviesService
         .getMovie(route.params?.id)
         .then(response => {
@@ -80,7 +83,9 @@ export default function DetailsMovie() {
       isActive = false;
       ac.abort();
     };
-  }, []);
+  };
+
+  useEffect(() => initScreen(), []);
 
   const render = () => {
     if (error) {
@@ -89,7 +94,7 @@ export default function DetailsMovie() {
           <Header>
             <BackButton />
           </Header>
-          <Error />
+          <Error onPressTryAgain={initScreen} />
         </>
       );
     }

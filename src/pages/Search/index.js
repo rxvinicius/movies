@@ -20,11 +20,14 @@ export default function Search() {
     }
   }
 
-  useEffect(() => {
+  const initScreen = () => {
     let isActive = true;
     const ac = new AbortController();
 
     async function getSearchMovie() {
+      setLoading(true);
+      setError(false);
+
       const movieName = route?.params?.name;
       moviesService
         .getSearchMovie(movieName)
@@ -50,10 +53,12 @@ export default function Search() {
       isActive = false;
       ac.abort();
     };
-  }, []);
+  };
+
+  useEffect(() => initScreen(), []);
 
   const render = () => {
-    if (error) return <Error />;
+    if (error) return <Error onPressTryAgain={initScreen} />;
     if (loading) return <Loading />;
     if (noMovies) return <Empty />;
 
