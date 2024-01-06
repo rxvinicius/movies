@@ -1,23 +1,25 @@
 import { useEffect, useState } from 'react';
-import { ScrollView } from 'react-native';
+import { Dimensions, ScrollView } from 'react-native';
 import { Container, SearchContainer, Input, SearchButton, Title, BannerButton, Banner, SliderMovie } from './styles';
 import { Header, SliderItem, Loading, Error } from '../../components';
 import * as SliderItemStyles from '../../components/SliderItem/styles';
 import { MOVIE_POSTER_PATH_URL, URL_MOVIES_DB } from '../../shared/constants';
-import { arrayRandomIndex, removeDuplicates } from '../../utils';
+import { removeDuplicates } from '../../utils';
 import { useNavigation } from '@react-navigation/native';
 import MoviesService from '../../services/MoviesService';
 import Feather from '@expo/vector-icons/Feather';
 import COLORS from '../../styles/colors';
+import Carousel from 'react-native-reanimated-carousel';
 
 export default function Home() {
   const title = 'React Prime';
+  const widthCarousel = Dimensions.get('window').width;
   const { navigate } = useNavigation();
   const moviesService = new MoviesService();
-  const [bannerMovie, setBannerMovie] = useState({});
   const [nowMovies, setNowMovies] = useState([]);
   const [popularMovies, setPopularMovies] = useState([]);
   const [topMovies, setTopMovies] = useState([]);
+  const [bannerMovies, setBannerMovies] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [findMovieInput, setFindMovieInput] = useState('');
@@ -91,19 +93,20 @@ export default function Home() {
     const ac = new AbortController();
 
     async function getMoviesList() {
-      const [nowData, popularData, topRatedData] = await Promise.all([
+      const [nowData, popularData, topRatedData, bannerData] = await Promise.all([
         getMovies(URL_MOVIES_DB.now_movies, pageNowMovies),
         getMovies(URL_MOVIES_DB.popular, pagePopularMovies),
         getMovies(URL_MOVIES_DB.top_rated, pageTopRated),
+        getMovies(URL_MOVIES_DB.popular),
       ])
         .catch(error => handleError(error))
         .finally(() => setLoading(false));
 
       if (isActive) {
-        setBannerMovie(nowData.data.results[arrayRandomIndex(nowData.data.results)]);
         setNowMovies(nowData.data.results);
         setPopularMovies(popularData.data.results);
         setTopMovies(topRatedData.data.results);
+        setBannerMovies(bannerData.data.results);
       }
     }
 
@@ -144,9 +147,19 @@ export default function Home() {
 
         <ScrollView showsVerticalScrollIndicator={false}>
           <Title>Trending</Title>
-          <BannerButton activeOpacity={0.8} onPress={() => navigateDetailsMovie(bannerMovie.id)}>
-            <Banner resizeMethod="resize" source={{ uri: `${MOVIE_POSTER_PATH_URL}${bannerMovie.backdrop_path}` }} />
-          </BannerButton>
+          <Carousel
+            loop
+            width={widthCarousel}
+            height={widthCarousel / 2}
+            autoPlay={true}
+            data={bannerMovies}
+            scrollAnimationDuration={2000}
+            renderItem={({ item }) => (
+              <BannerButton activeOpacity={0.8} onPress={() => navigateDetailsMovie(item.id)}>
+                <Banner resizeMethod="resize" source={{ uri: `${MOVIE_POSTER_PATH_URL}${item.backdrop_path}` }} />
+              </BannerButton>
+            )}
+          />
 
           <SliderMovie
             horizontal={true}
