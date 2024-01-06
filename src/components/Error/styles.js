@@ -21,7 +21,7 @@ export const Title = styled.Text`
 `;
 
 export const Message = styled.Text`
-  color: ${COLORS.WHITE};
+  color: ${COLORS.PRIMARY};
   font-size: 16px;
   margin-top: 10px;
 `;

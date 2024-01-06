@@ -41,8 +41,12 @@ export default function Home() {
   }
 
   const handleError = error => {
-    setError(true);
-    console.log('error ->', error);
+    if (error) {
+      setError(true);
+      console.log('error ->', error);
+    } else {
+      setError(false);
+    }
   };
 
   const renderItem = ({ item }) => (
@@ -88,11 +92,14 @@ export default function Home() {
       .catch(error => handleError(error));
   };
 
-  useEffect(() => {
+  const initScreen = () => {
     let isActive = true;
     const ac = new AbortController();
 
     async function getMoviesList() {
+      setLoading(true);
+      handleError(false);
+
       const [nowData, popularData, topRatedData, bannerData] = await Promise.all([
         getMovies(URL_MOVIES_DB.now_movies, pageNowMovies),
         getMovies(URL_MOVIES_DB.popular, pagePopularMovies),
@@ -111,18 +118,21 @@ export default function Home() {
     }
 
     getMoviesList();
+
     return () => {
       isActive = false;
       ac.abort();
     };
-  }, []);
+  };
+
+  useEffect(() => initScreen(), []);
 
   const render = () => {
     if (error) {
       return (
         <>
           <Header title={title} />
-          <Error />
+          <Error onPressTryAgain={initScreen} />
         </>
       );
     }
