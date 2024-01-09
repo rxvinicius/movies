@@ -1,7 +1,8 @@
 {
   "expo": {
     "name": "React Prime",
-    "slug": "reactprime",
+    "slug": "react-prime",
+    "description": "React native movies app inspired in Prime Video.",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -11,17 +12,33 @@
       "image": "./assets/splash.png",
       "resizeMode": "cover"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.rxvinicius.reactprime"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png"
-      }
+      },
+      "package": "com.rxvinicius.reactprime"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "a0ed26a2-e995-4d34-8198-18cf3bf0f534"
+      }
+    },
+    "owner": "rxvinicius",
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/a0ed26a2-e995-4d34-8198-18cf3bf0f534"
     }
   }
 }

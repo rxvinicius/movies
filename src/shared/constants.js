@@ -1,3 +1,8 @@
+export const BASE_URL = {
+  prod: 'https://movies-api-nu-three.vercel.app',
+  dev: 'http://192.168.1.10:3000', // your ip
+};
+
 export const URL_MOVIES_DB = {
   now_movies: '/movie/now_playing',
   popular: '/movie/popular',
