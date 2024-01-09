@@ -4,7 +4,7 @@ import { Container, SearchContainer, Input, SearchButton, Title, BannerButton, B
 import { Header, SliderItem, Loading, Error } from '../../components';
 import * as SliderItemStyles from '../../components/SliderItem/styles';
 import { MOVIE_POSTER_PATH_URL, URL_MOVIES_DB } from '../../shared/constants';
-import { removeDuplicates } from '../../utils';
+import { arraySize, removeDuplicates } from '../../utils';
 import { useNavigation } from '@react-navigation/native';
 import MoviesService from '../../services/MoviesService';
 import Feather from '@expo/vector-icons/Feather';
@@ -113,7 +113,7 @@ export default function Home() {
         setNowMovies(nowData.data.results);
         setPopularMovies(popularData.data.results);
         setTopMovies(topRatedData.data.results);
-        setBannerMovies(bannerData.data.results);
+        setBannerMovies(arraySize(10, bannerData.data.results));
       }
     }
 
