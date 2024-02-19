@@ -21,6 +21,3 @@ React native movies app inspired in Prime Video.
 * Override `baseURL.dev` value by your ip in [constants.js](src/shared/constants.js) and pass `dev` value to [Api.js](src/services/Api.js)
 
 Once the development server is running, the easiest way to launch the app is on a physical device with Expo Go. For more information, see [Open app on a device](https://docs.expo.dev/get-started/create-a-project/#open-the-app-on-your-device).
-
-
-
