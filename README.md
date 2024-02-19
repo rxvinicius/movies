@@ -23,4 +23,6 @@ React native movies app inspired in Prime Video.
 Once the development server is running, the easiest way to launch the app is on a physical device with Expo Go. For more information, see [Open app on a device](https://docs.expo.dev/get-started/create-a-project/#open-the-app-on-your-device).
 
 
+https://github.com/rxvinicius/movies/assets/45105154/964ee12f-1184-4036-bd95-51c8a0e1a959
+
 
