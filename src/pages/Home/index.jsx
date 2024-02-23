@@ -105,15 +105,14 @@ export default function Home() {
         getMovies(URL_MOVIES_DB.popular, pagePopularMovies),
         getMovies(URL_MOVIES_DB.top_rated, pageTopRated),
         getMovies(URL_MOVIES_DB.popular),
-      ])
-        .catch(error => handleError(error))
-        .finally(() => setLoading(false));
+      ]).catch(error => handleError(error));
 
       if (isActive) {
         setNowMovies(nowData.data.results);
         setPopularMovies(popularData.data.results);
         setTopMovies(topRatedData.data.results);
         setBannerMovies(arraySize(10, bannerData.data.results));
+        setLoading(false);
       }
     }
 

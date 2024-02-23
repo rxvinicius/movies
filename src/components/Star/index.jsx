@@ -9,25 +9,17 @@ import PropTypes from 'prop-types';
  * }} props
  */
 
-export default function Star(props) {
+const Star = props => {
   const { variant, size } = props;
   const defaultName = 'md-star';
   const small = 12;
   const large = 24;
 
-  const getName = () => {
-    if (variant) {
-      return `${defaultName}-${variant}`;
-    }
-    return defaultName;
-  };
-
-  const getSize = () => {
-    return size === 'small' ? small : large;
-  };
+  const getName = () => (variant ? `${defaultName}-${variant}` : defaultName);
+  const getSize = () => (size === 'small' ? small : large);
 
   return <Ionicons name={getName()} size={getSize()} color={COLORS.YELLOW} />;
-}
+};
 
 Star.defaultProps = {
   variant: null,
@@ -38,3 +30,5 @@ Star.propTypes = {
   variant: PropTypes.oneOf(['outline', 'half']),
   size: PropTypes.oneOf(['small', 'large']),
 };
+
+export default Star;
