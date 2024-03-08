@@ -6,7 +6,8 @@
 
 React native movies app inspired in Prime Video.
 
-👉 <a href='https://drive.google.com/file/d/1E4tyBsSy_g6H1CZqJmXQseruj8a-_ut6/view?usp=drive_link'>Video Demo</a>
+📲 <a href='https://expo.dev/artifacts/eas/btnD1HJZzXw22EvpABDNS4.apk'>Android build</a> <br>
+👉 <a href='https://drive.google.com/file/d/1fvkseJ8G-mT4qetUO-sm_TLKT8AHLJml/view?usp=drive_link'>Video Demo</a>
 
 ## Prerequisites
 
