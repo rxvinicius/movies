@@ -4,9 +4,9 @@
 
 # React Prime
 
-React native movies app inspired in Prime Video.
+React native movies app.
 
-📲 <a href='https://expo.dev/artifacts/eas/btnD1HJZzXw22EvpABDNS4.apk'>Android build</a> <br>
+📲 <a href='https://expo.dev/artifacts/eas/btnD1HJZzXw22EvpABDNS4.apk'>Android Download</a> <br>
 👉 <a href='https://drive.google.com/file/d/1fvkseJ8G-mT4qetUO-sm_TLKT8AHLJml/view?usp=drive_link'>Video Demo</a>
 
 ## Prerequisites

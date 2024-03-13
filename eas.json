@@ -10,6 +10,12 @@
     "preview": {
       "distribution": "internal"
     },
+    "local": {
+      "android": {
+        "buildType": "apk",
+        "gradleCommand": ":app:assembleRelease"
+      }
+    },
     "production": {}
   },
   "submit": {
