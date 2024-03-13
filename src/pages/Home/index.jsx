@@ -10,9 +10,9 @@ import MoviesService from '../../services/MoviesService';
 import Feather from '@expo/vector-icons/Feather';
 import COLORS from '../../styles/colors';
 import Carousel from 'react-native-reanimated-carousel';
+import { expo } from '../../../app.json';
 
 export default function Home() {
-  const title = 'React Prime';
   const widthCarousel = Dimensions.get('window').width;
   const { navigate } = useNavigation();
   const moviesService = new MoviesService();
@@ -130,7 +130,7 @@ export default function Home() {
     if (error) {
       return (
         <>
-          <Header title={title} />
+          <Header title={expo.name} />
           <Error onPressTryAgain={initScreen} />
         </>
       );
@@ -140,7 +140,7 @@ export default function Home() {
 
     return (
       <>
-        <Header title={title} />
+        <Header title={expo.name} />
 
         <SearchContainer>
           <Input
