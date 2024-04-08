@@ -4,24 +4,33 @@
 
 # React Prime
 
-React native movies app.
+<p>
+  <b>React Prime</b> is an application that consumes the API made by <a href='https://www.themoviedb.org'>The Movie Database</a> made to display, find and add movies to favorite list.
+</p>
 
 📲 <a href='https://expo.dev/artifacts/eas/btnD1HJZzXw22EvpABDNS4.apk'>Android Download</a> <br>
 👉 <a href='https://drive.google.com/file/d/1fvkseJ8G-mT4qetUO-sm_TLKT8AHLJml/view?usp=drive_link'>Video Demo</a>
 
-## Prerequisites
+### Build with
+» React Native <br>
+» Expo <br>
+» Styled Components <br>
+» Redux
+
+## Instalation
+### Prerequisites
 
 - Install [Expo Go](https://expo.dev/client) on a physical device
 - [Node](https://nodejs.org/en) 12 LTS (or greater) and [yarn](https://classic.yarnpkg.com/lang/en/docs/install/#windows-stable) installed
 
-## Getting Started
+### Getting Started
 
 - Clone this repository
 - Access the project directory
 - Run `yarn install` to install dependencies
 - `yarn start` to start a development server from the terminal
 
-## Running locally
+### Running locally
 
 - Clone this [repository](https://github.com/rxvinicius/movies-api)
 - Follow the step by step
