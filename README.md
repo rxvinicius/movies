@@ -8,7 +8,7 @@
   <b>React Prime</b> is an application that consumes the API made by <a href='https://www.themoviedb.org'>The Movie Database</a> made to display, find and add movies to favorite list.
 </p>
 
-📲 <a href='https://expo.dev/artifacts/eas/btnD1HJZzXw22EvpABDNS4.apk'>Android Download</a> <br>
+📲 <a href='https://drive.google.com/file/d/1fiWxOjqbJI_o_c9awBQekhhhnk2Z8cKZ/view?usp=sharing'>Android Download</a> <br>
 👉 <a href='https://drive.google.com/file/d/1fvkseJ8G-mT4qetUO-sm_TLKT8AHLJml/view?usp=drive_link'>Video Demo</a>
 
 ### Build with
