@@ -42,17 +42,13 @@
 
 Once the development server is running, the easiest way to launch the app is on a physical device with Expo Go. For more information, see [Open app on a device](https://docs.expo.dev/get-started/create-a-project/#open-the-app-on-your-device).
 
-<div align='center'>
-  <img style="width:15%" src='src/assets/icon-without-background.png'/>
-</div>
-
 ## Screenshots of the Project 📸
 
-<br>
-
-<div align='center'>
-  <img src='src/assets/preview/home.PNG'/>
-  <img src='src/assets/preview/details_movie.PNG'/>
-  <img src='src/assets/preview/search_movies.PNG'/>
-  <img src='src/assets/preview/saved_movies.PNG'/>
-</div>
+<table align="center">
+  <tr>
+    <td align="center"><img src="src/assets/preview/home.PNG" width="200"/><br/><b>Home Page 🏡</b></td>
+    <td align="center"><img src="src/assets/preview/details_movie.PNG" width="200"/><br/><b>Movie Details 📽</b></td>
+    <td align="center"><img src="src/assets/preview/search_movies.PNG" width="200"/><br/><b>Search Movies 🔎</b></td>
+    <td align="center"><img src="src/assets/preview/saved_movies.PNG" width="200"/><br/><b>Saved Movies 🔖</b></td>
+  </tr>
+</table>
