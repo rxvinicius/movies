@@ -12,12 +12,14 @@
 👉 <a href='https://drive.google.com/file/d/1fvkseJ8G-mT4qetUO-sm_TLKT8AHLJml/view?usp=drive_link'>Video Demo</a>
 
 ### Build with
+
 » React Native <br>
 » Expo <br>
 » Styled Components <br>
 » Redux
 
 ## Instalation
+
 ### Prerequisites
 
 - Install [Expo Go](https://expo.dev/client) on a physical device
@@ -37,3 +39,18 @@
 - Override `baseURL.dev` value by your ip in [constants.js](src/shared/constants.js) and pass `dev` value to [Api.js](src/services/Api.js)
 
 Once the development server is running, the easiest way to launch the app is on a physical device with Expo Go. For more information, see [Open app on a device](https://docs.expo.dev/get-started/create-a-project/#open-the-app-on-your-device).
+
+<div align='center'>
+  <img style="width:15%" src='src/assets/icon-without-background.png'/>
+</div>
+
+## Screenshots of the Project 📸
+
+<br>
+
+<div align='center'>
+  <img src='src/assets/preview/home.PNG'/>
+  <img src='src/assets/preview/details_movie.PNG'/>
+  <img src='src/assets/preview/search_movies.PNG'/>
+  <img src='src/assets/preview/saved_movies.PNG'/>
+</div>
