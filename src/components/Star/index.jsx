@@ -9,22 +9,12 @@ import PropTypes from 'prop-types';
  * }} props
  */
 
-const Star = props => {
-  const { variant, size } = props;
-  const defaultName = 'md-star';
-  const small = 12;
-  const large = 24;
+const getName = variant => 'star' + (variant && `-${variant}`);
+const getSize = { small: 12, large: 24 };
 
-  const getName = () => (variant ? `${defaultName}-${variant}` : defaultName);
-  const getSize = () => (size === 'small' ? small : large);
-
-  return <Ionicons name={getName()} size={getSize()} color={COLORS.YELLOW} />;
-};
-
-Star.defaultProps = {
-  variant: null,
-  size: 'small',
-};
+const Star = ({ variant = '', size = 'small' }) => (
+  <Ionicons name={getName(variant)} size={getSize[size]} color={COLORS.YELLOW} />
+);
 
 Star.propTypes = {
   variant: PropTypes.oneOf(['outline', 'half']),
