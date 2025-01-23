@@ -8,6 +8,7 @@
     "icon": "./src/assets/icon.png",
     "userInterfaceStyle": "dark",
     "backgroundColor": "#141a29",
+    "newArchEnabled": true,
     "splash": {
       "image": "./src/assets/splash.png",
       "resizeMode": "cover"
